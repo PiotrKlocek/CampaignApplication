@@ -21,6 +21,12 @@ public class CampaignController {
         return campaignService.getAllCampaigns();
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Campaign> getUserCampaigns(@PathVariable Long userId) {
+        return campaignService.getUserCampaigns(userId);
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<Campaign> getCampaignById(@PathVariable Long id) {
         return campaignService.getCampaignById(id)

@@ -90,4 +90,9 @@ public class CampaignService {
 
         campaignRepository.delete(campaign);
     }
+
+    public List<Campaign> getUserCampaigns(Long userId) {
+        return campaignRepository.findByUserId(userId);
+    }
+
 }
