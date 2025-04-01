@@ -28,28 +28,33 @@ public class CampaignController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public Campaign createCampaign(@Valid @RequestBody Campaign campaign) {
-        return campaignService.createCampaign(campaign);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Campaign> updateCampaign(@PathVariable Long id, @Valid @RequestBody Campaign campaign) {
+    @PostMapping("/{userId}")
+    public ResponseEntity<Campaign> createCampaign(@PathVariable Long userId, @Valid @RequestBody Campaign campaign) {
         try {
-            Campaign updatedCampaign = campaignService.updateCampaign(id, campaign);
-            return ResponseEntity.ok(updatedCampaign);
+            Campaign createdCampaign = campaignService.createCampaign(userId, campaign);
+            return ResponseEntity.ok(createdCampaign);
         } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body(null);
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCampaign(@PathVariable Long id) {
+    @PutMapping("/{userId}/{id}")
+    public ResponseEntity<Campaign> updateCampaign(@PathVariable Long userId, @PathVariable Long id, @Valid @RequestBody Campaign campaign) {
         try {
-            campaignService.deleteCampaign(id);
+            Campaign updatedCampaign = campaignService.updateCampaign(userId, id, campaign);
+            return ResponseEntity.ok(updatedCampaign);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @DeleteMapping("/{userId}/{id}")
+    public ResponseEntity<Void> deleteCampaign(@PathVariable Long userId, @PathVariable Long id) {
+        try {
+            campaignService.deleteCampaign(userId, id);
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().build();
         }
     }
 }

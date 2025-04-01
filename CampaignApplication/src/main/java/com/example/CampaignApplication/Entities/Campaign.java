@@ -42,4 +42,8 @@ public class Campaign {
    @Min(value = 1, message = "Radius must be at least 1")
    @Column(name = "radius")
    private int radius;
+
+   @ManyToOne
+   @JoinColumn(name = "user_id", nullable = false)
+   private User user;
 }
