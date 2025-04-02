@@ -1,4 +1,5 @@
 package com.example.CampaignApplication.Entities;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "CAMPAIGN")
 public class Campaign {
+
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
@@ -34,8 +36,9 @@ public class Campaign {
    @Column(name = "status")
    private boolean status;
 
-   @Column(name = "city")
-   private String city;
+   @NotNull(message = "City ID is mandatory")
+   @Column(name = "city_id")
+   private Long cityId;
 
    @NotNull(message = "Radius is mandatory")
    @Min(value = 1, message = "Radius must be at least 1")

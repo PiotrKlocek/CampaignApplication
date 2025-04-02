@@ -70,7 +70,7 @@ public class CampaignService {
         campaign.setBidAmount(campaignDetails.getBidAmount());
         campaign.setCampaignFund(campaignDetails.getCampaignFund());
         campaign.setStatus(campaignDetails.isStatus());
-        campaign.setCity(campaignDetails.getCity());
+        campaign.setCityId(campaignDetails.getCityId());
         campaign.setRadius(campaignDetails.getRadius());
 
         return campaignRepository.save(campaign);
