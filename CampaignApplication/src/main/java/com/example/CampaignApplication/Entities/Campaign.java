@@ -28,7 +28,6 @@ public class Campaign {
    private double bidAmount;
 
    @NotNull(message = "Campaign fund is mandatory")
-   @Min(value = 50, message = "Campaign fund must be at least 50")
    @Column(name = "campaign_fund")
    private double campaignFund;
 
